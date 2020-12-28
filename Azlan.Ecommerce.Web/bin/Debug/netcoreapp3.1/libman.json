@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery-validate@1.19.2",
+      "destination": "wwwroot/js/",
+      "files": [
+        "jquery.validate.min.js"
+      ]
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/js/"
+    },
+    {
+      "library": "ckeditor5@22.0.0",
+      "destination": "wwwroot/admin/ckeditor5/",
+      "files": [
+        "ckeditor.js"
+      ]
+    },
+    {
+      "library": "js-cookie@2.2.1",
+      "destination": "wwwroot/home/js/",
+      "files": [
+        "js.cookie.min.js"
+      ]
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/home/js/",
+      "files": [
+        "toastr.min.js"
+      ]
+    }
+  ]
+}

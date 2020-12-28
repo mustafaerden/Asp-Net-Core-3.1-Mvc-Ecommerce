@@ -1,0 +1,15 @@
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.deps.json
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.dll
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.csprojAssemblyReference.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.AssemblyInfoInputs.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.AssemblyInfo.cs
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.runtimeconfig.json
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.runtimeconfig.dev.json
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.genruntimeconfig.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.pdb
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.dll
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.pdb
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.csproj.CoreCompileInputs.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.csproj.CopyComplete
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.dll
+C:\MyProjects\ECommerce\Azlan.Ecommerce.DataAccess\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.pdb

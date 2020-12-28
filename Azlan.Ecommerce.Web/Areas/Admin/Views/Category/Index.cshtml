@@ -1,0 +1,122 @@
+﻿@model CategoryListModel
+@{
+    ViewData["Title"] = "All Categories";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    var categories = Model.Categories;
+
+    void GetCategories(List<Azlan.Ecommerce.Entities.Category> categories)
+    {
+        if (categories.Count > 0)
+        {
+            foreach (var category in categories)
+            {
+                <div class="card mb-2 p-4">
+                    <div class="media">
+                        @if (category.ParentCategoryId != null)
+                        {
+                            <i class="icon-arrow-right-circle mr-2"></i>
+                        }
+                        else
+                        {
+                            <i class="icon-arrow-down font-weight-bold mr-2"></i>
+                        }
+                        <div class="media-body">
+                            <p class="d-inline @( category.ParentCategoryId == null ? "bg-white p-2 rounded" : "" )">@category.Name ----</p>
+                            <span class="ml-2">
+                                <a href="/admin/category/edit/@category.Id" class="mr-1">
+                                    <p class="text-info d-inline">Edit</p>
+                                </a>
+                                /
+                                <a href="#" data-toggle="modal" data-target="#deleteModal" data-mustafa="@category.Id">
+                                    <p class="text-danger d-inline">Delete</p>
+                                </a>
+                            </span>
+
+                            @{
+                                GetCategories(category.SubCategories);
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+    }
+}
+
+@section MainTitle {
+    <div class="w-sm-100 mr-auto"><h4 class="mb-0">Categories</h4></div>
+
+    <ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
+        <li class="breadcrumb-item">
+            <a asp-controller="dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">Categories</li>
+    </ol>
+}
+
+
+<div class="d-flex justify-content-between align-items-center">
+    <h5>All Categories</h5>
+    <a asp-controller="category" asp-action="create" class="btn btn-success">Add Category</a>
+</div>
+<hr />
+
+
+
+@{
+    GetCategories(categories);
+}
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this category? You wont be able to revert this action.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button id="btnDelete" type="button" class="btn btn-success">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                var triggerElement = $(event.relatedTarget);
+                var id = triggerElement.data("mustafa");
+
+                $('#btnDelete').click(function () {
+                    $.ajax({
+                        type: "Get",
+                        url: "/Admin/Category/Delete",
+                        data: { id: id },
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8;",
+                        success: function () {
+                            window.location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.statusText)
+                        }
+                    })
+                })
+
+            })
+        })
+    </script>
+}
+
+

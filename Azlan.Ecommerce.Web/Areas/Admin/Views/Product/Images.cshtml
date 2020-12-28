@@ -1,0 +1,225 @@
+﻿@model ProductImagesModel
+@{
+    ViewData["Title"] = "Product Images";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/admin/simplelightbox/simple-lightbox.min.css" rel="stylesheet" />
+    <style>
+        .gallery {
+            display: flex;
+            padding: 20px;
+        }
+
+            .gallery > img {
+                width: 200px;
+                height: 200px;
+                object-fit: contain;
+                border: 1px solid rgba(72, 94, 144, 0.16);
+                border-radius: 5px;
+                margin-right: 15px;
+            }
+
+        .productThumbs > img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+        }
+    </style>
+}
+
+@section Scripts{
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/admin/simplelightbox/simple-lightbox.min.js"></script>
+    <script>
+        $(function () {
+            var imagesPreview = function (input, placeToInsertImagePreview) {
+
+                if (input.files) {
+                    var filesAmount = input.files.length;
+
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function (event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+
+            };
+
+            $('#gallery-photo-add').on('change', function () {
+                imagesPreview(this, 'div.gallery');
+                $("#galleryWrapper").removeClass("d-none");
+            });
+
+            // lightbox;
+            var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+
+            // delete product image;
+            $('#productImageDeleteModal').on('show.bs.modal', function (event) {
+                var triggerElement = $(event.relatedTarget);
+                var id = triggerElement.data("mustafa");
+
+                $('#btnProductImageDelete').click(function () {
+                    $.ajax({
+                        type: "Get",
+                        url: "/Admin/Product/DeleteImage",
+                        data: { id: id },
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8;",
+                        success: function () {
+                            window.location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.statusText)
+                        }
+                    })
+                })
+            })
+
+            // Setting Featured Image;
+            $('.featuredImageClass').change(function () {
+                var imageId = $(this).attr("dataID");
+                var productId = $(this).attr("dataProductID");
+                var isChecked = $(this).prop("checked");
+
+                $.ajax({
+                    type: "Get",
+                    url: "/Admin/Product/SetFeaturedImage",
+                    data: { imageId: imageId, productId: productId, isChecked: isChecked },
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8;",
+                    success: function () {
+                        window.location.reload();
+                    },
+                    error: function (error) {
+                        alert(error.statusText)
+                    }
+                })
+
+            });
+        });
+
+    </script>
+}
+
+@section MainTitle {
+    <div class="w-sm-100 mr-auto"><h4 class="mb-0">Product Images</h4></div>
+
+    <ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
+        <li class="breadcrumb-item">
+            <a asp-controller="dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="product" asp-action="index">Products</a>
+        </li>
+        <li class="breadcrumb-item">Product Images</li>
+    </ol>
+}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="card-title">Images of '@Model.Name'</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    @if (Model.ProductImages.Count > 0)
+                    {
+                        <div class="gallery">
+                            @foreach (var image in Model.ProductImages)
+                            {
+                                <div class="card mr-2">
+                                    <a class="productThumbs" href="~/uploads/products/@image.Url"><img src="~/uploads/products/@image.Url" alt="@Model.Name" /></a>
+                                    <div class="card-body">
+                                        @*<button onclick="deleteProductHandle(@image.Id)" id="deleteProductImage" class="btn btn-danger btn-sm btn-block"><i class="fa fa-trash"></i> Delete</button>*@
+                                        <a class="btn btn-danger btn-block btn-sm mb-2" href="#" data-toggle="modal" data-target="#productImageDeleteModal" data-mustafa="@image.Id">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </a>
+                                        <div style="margin-bottom: 0 !important;" class="form-group form-check-inline">
+                                            <input @(image.Id == Model.FeaturedImageId ? "checked" : "") dataProductID="@Model.Id" dataID="@image.Id" type="checkbox" class="featuredImageClass form-check-input" id="exampleCheck@(image.Id)">
+                                            <br />
+                                            <label class="form-check-label" for="exampleCheck@(image.Id)">Featured Image</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-primary" role="alert">
+                            This product doesnt have any images yet. You can upload using the form down below.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">You can upload one or more images for the product</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+            <div class="row d-none" id="galleryWrapper">
+                <div class="col-12 gallery">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <form asp-controller="product" asp-action="images" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="@Model.Id" />
+                        <div class="custom-file">
+                            <input id="gallery-photo-add" class="custom-file-input mb-2" asp-for="@Model.Files">
+                            <label for="Upload" class="custom-file-label">Choose files</label>
+                            <span class="text-danger font-italic" asp-validation-for="Files"></span>
+                        </div>
+                        <div class="form-group row mt-2">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                                <a class="btn btn-outline-danger" asp-controller="product" asp-action="index">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="productImageDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this this image from product? You wont be able to revert this action.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button id="btnProductImageDelete" type="button" class="btn btn-success">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

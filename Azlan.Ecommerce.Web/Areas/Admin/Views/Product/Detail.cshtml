@@ -1,0 +1,97 @@
+﻿@model ProductDetailModel
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int indexOfImage = 0;
+}
+
+@section MainTitle {
+    <div class="w-sm-100 mr-auto"><h4 class="mb-0">Product Detail</h4></div>
+
+    <ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
+        <li class="breadcrumb-item">
+            <a asp-controller="dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="product" asp-action="index">Products</a>
+        </li>
+        <li class="breadcrumb-item">Product Detail</li>
+    </ol>
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                @if (Model.ProductImages.Count > 0)
+                {
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
+                        </ol>
+                        <div class="carousel-inner">
+
+                            @foreach (var image in Model.ProductImages)
+                            {
+                                indexOfImage++;
+                                <div class="carousel-item @(indexOfImage == 1 ? "active" : "")">
+                                    <img class="d-block w-100" src="~/uploads/products/@image" alt="product-image">
+                                </div>
+                            }
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <img class="img-fluid" src="~/uploads/products/no-image.png" />
+                }
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <div class="card-body border brd-gray border-top-0 border-right-0 border-left-0">
+                    <h3 class="mb-0 f-weight-500 text-primary">
+                        @Model.Name
+                        @if (Model.Featured)
+                        {
+                            <span style="font-size: 13px;" class="text-danger"> (Featured Product)</span>
+                        }
+                    </h3>
+                </div>
+                <div class="card-body border brd-gray border-top-0 border-right-0 border-left-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="float-left ml-2">
+                                <h4 class="lato-font mb-0 text-danger">₱@Model.Price</h4>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body border brd-gray border-top-0 border-right-0 border-left-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="float-left ml-2">
+                                <h4 class="lato-font mb-0">'@Model.StockCount' In Stock</h4>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body border brd-gray border-top-0 border-right-0 border-left-0">
+                    <p class="mb-0" lang="ca">@Html.Raw(Model.Description)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

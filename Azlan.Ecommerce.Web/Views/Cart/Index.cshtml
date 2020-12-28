@@ -1,0 +1,101 @@
+﻿@model CartModel
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Breadcrumb Area Start-->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h1 class="breadmome-name">Shopping Cart</h1>
+                    <ul>
+                        <li>
+                            <a asp-controller="home" asp-action="index">Home</a>
+                        </li>
+                        <li class="active">Shopping Cart</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Breadcrumb Area End-->
+
+<div class="Shopping-cart-area mt-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                @if (Model.CartItems.Any())
+                {
+                    <div class="table-content table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="picaboo-product-remove">remove</th>
+                                    <th class="picaboo-product-thumbnail">image</th>
+                                    <th class="cart-product-name">Product</th>
+                                    <th class="picaboo-product-price">Unit Price</th>
+                                    <th class="picaboo-product-quantity">Quantity</th>
+                                    <th class="picaboo-product-subtotal">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CartItems)
+                                {
+                                    <tr>
+                                        <td class="picaboo-product-remove">
+                                            <form asp-controller="cart" asp-action="deletefromcart" method="post">
+                                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                                <button type="submit" class="btn btn-sm">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="picaboo-product-thumbnail">
+                                            <img width="150" src="~/uploads/products/@item.ImageUrl" alt="@item.Name" />
+                                        </td>
+                                        <td class="picaboo-product-name">
+                                            @item.Name
+                                        </td>
+                                        <td class="picaboo-product-price"><span class="amount">@item.Price.ToString("c")</span></td>
+                                        <td class="picaboo-product-quantity">
+                                            <input value="@item.Quantity" type="number" min="1" step="1">
+                                        </td>
+                                        <td class="product-subtotal"><span class="amount">@((item.Quantity * item.Price).ToString("c"))</span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="coupon-all">
+                                <input class="button" name="update_cart" value="Update cart" type="submit">
+                            </div>
+                        </div>
+                        <div class="col-md-5 ml-auto">
+                            <div class="cart-page-total">
+                                <h2>Cart total</h2>
+                                <ul>
+                                    <li>Total <span>@Model.TotalPrice().ToString("c")</span></li>
+                                </ul>
+                                <a asp-controller="home" asp-action="index">Continue Shopping</a>
+                                <a asp-controller="cart" asp-action="checkout">Proceed to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info text-center" role="alert">
+                        <p class="mb-0">There is no products in your cart yet. <a asp-controller="shop" asp-action="list"><strong>Go to Shopping List</strong></a></p>
+                    </div>
+                    
+                }
+            </div>
+        </div>
+    </div>
+</div>

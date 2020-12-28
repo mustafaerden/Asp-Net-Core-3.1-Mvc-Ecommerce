@@ -1,0 +1,14 @@
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.deps.json
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.dll
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.pdb
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.dll
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.dll
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.DataAccess.pdb
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.pdb
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.csprojAssemblyReference.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.AssemblyInfoInputs.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.AssemblyInfo.cs
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.csproj.CoreCompileInputs.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.csproj.CopyComplete
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.dll
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Business\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Business.pdb

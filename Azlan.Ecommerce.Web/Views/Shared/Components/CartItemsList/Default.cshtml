@@ -1,0 +1,56 @@
+﻿@model CartModel
+
+<div class="mini-cart">
+    <a asp-controller="cart" asp-action="index">
+        <span class="cart-info">
+            <span id="myCartCount" class="cart-total">
+                @Model.CartItems.Count
+            </span>
+            <span class="text">My Cart</span>
+        </span>
+    </a>
+    <!-- Cart Dropdown Start -->
+    <div class="header-cart" style="display: none; min-height: 300px; padding-top: 5px; margin-top: 0px; padding-bottom: 5px; margin-bottom: 0px;">
+        @if (Model.CartItems.Any())
+        {
+            <ul class="cart-items">
+                @foreach (var product in Model.CartItems)
+                {
+                    <li class="single-cart-item">
+                        <div class="cart-img">
+                            <a href="shopping-cart.html"><img class="img-fluid" src="~/uploads/products/@product.ImageUrl" alt=""></a>
+                            <span class="cart-sticker">@(product.Quantity)x</span>
+                        </div>
+                        <div class="cart-content">
+                            <h5 class="product-name">
+                                <a href="single-product.html">@product.Name</a>
+                            </h5>
+                            <span class="product-price">@((product.Price * product.Quantity).ToString("c"))</span>
+                        </div>
+                        <div class="cart-item-remove">
+                            <form class="d-inline" asp-controller="cart" asp-action="deletefromcart" method="post">
+                                <input type="hidden" name="productId" value="@product.ProductId" />
+                                <button type="submit" class="btn btn-danger btn-sm mt-2">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <div class="cart-total">
+                <h5>Subtotal <span class="float-right">@(Model.TotalPrice().ToString("c"))</span></h5>
+                <h5>Shipping <span class="float-right">$7.00</span></h5>
+                <h5>Total <span class="float-right">@(Model.TotalPrice().ToString("c"))</span></h5>
+            </div>
+            <div class="checkout">
+                <a asp-controller="cart" asp-action="checkout">checkout</a>
+            </div>
+        }
+        else
+        {
+            <p>No products in your cart yet.</p>
+        }
+    </div>
+    <!-- Cart Dropdown End -->
+</div>

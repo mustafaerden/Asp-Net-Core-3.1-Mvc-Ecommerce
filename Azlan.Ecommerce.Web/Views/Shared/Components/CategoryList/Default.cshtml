@@ -1,0 +1,35 @@
+﻿@model CategoryListViewModel
+<!--Category Menu Start-->
+<div class="category-menu">
+    <div class="category-heading">
+        <h2 class="categories-toggle"><span>categories</span><i class="ion-ios-arrow-down"></i></h2>
+    </div>
+    <div id="cate-toggle" class="category-menu-list">
+        <ul>
+            @if (Model.Categories.Count > 0)
+            {
+                foreach (var category in Model.Categories)
+                {
+                    <li class="@(category.SubCategories.Count > 0 ? "right-menu" : "")">
+                        <a asp-controller="shop"
+                           asp-action="list"
+                           asp-route-category="@category.Name.ToLower()">@category.Name</a>
+                        @if (category.SubCategories.Count > 0)
+                        {
+                            <ul class="cat-dropdown">
+                                @foreach (var subCategory in category.SubCategories)
+                                {
+                                    <li>
+                                        <a asp-controller="shop"
+                                           asp-action="list"
+                                           asp-route-category="@subCategory.Name.ToLower()">@subCategory.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>

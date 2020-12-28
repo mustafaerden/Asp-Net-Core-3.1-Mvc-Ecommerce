@@ -1,0 +1,9 @@
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Entities\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.deps.json
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Entities\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.dll
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Entities\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.csprojAssemblyReference.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Entities\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.AssemblyInfoInputs.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Entities\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.AssemblyInfo.cs
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Entities\bin\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.pdb
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Entities\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.csproj.CoreCompileInputs.cache
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Entities\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.dll
+C:\MyProjects\ECommerce\Azlan.Ecommerce.Entities\obj\Debug\netcoreapp3.1\Azlan.Ecommerce.Entities.pdb

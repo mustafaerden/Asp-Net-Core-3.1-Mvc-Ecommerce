@@ -1,0 +1,86 @@
+﻿@model UserRegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Breadcrumb Area Start-->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h1 class="breadmome-name">Register</h1>
+                    <ul>
+                        <li><a asp-controller="home" asp-action="index">Home</a></li>
+                        <li class="active">Register</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Breadcrumb Area End-->
+
+<div class="register-area mt-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
+                <div class="login">
+                    <div class="login-form-container">
+                        <div class="login-form">
+                            <form asp-controller="account" asp-action="register" method="post">
+                                <div class="bg-danger rounded mb-2 text-white text-small shadow py-3 px-1 text-center" asp-validation-summary="ModelOnly"></div>
+
+                                <label>First Name</label>
+                                <span class="text-danger font-italic" asp-validation-for="FirstName"></span>
+                                <input asp-for="FirstName">
+
+                                <label>Middle Name <small class="text-danger">*Optional</small></label>
+                                <span class="text-danger font-italic" asp-validation-for="MiddleName"></span>
+                                <input asp-for="MiddleName">
+
+
+                                <label>Last Name</label>
+                                <span class="text-danger font-italic" asp-validation-for="LastName"></span>
+                                <input asp-for="LastName">
+
+                                <label>Username</label>
+                                <span class="text-danger font-italic" asp-validation-for="UserName"></span>
+                                <input asp-for="UserName">
+
+
+                                <label>Email</label>
+                                <span class="text-danger font-italic" asp-validation-for="Email"></span>
+                                <input asp-for="Email">
+
+
+                                <label>Password</label>
+                                <span class="text-danger font-italic" asp-validation-for="Password"></span>
+                                <input asp-for="Password" type="password">
+
+
+                                <label>Confirm Password</label>
+                                <span class="text-danger font-italic" asp-validation-for="ConfirmPassword"></span>
+                                <input asp-for="ConfirmPassword" type="password">
+
+
+                                <div class="button-box">
+                                    <button type="submit" class="default-btn">register</button>
+                                </div>
+                            </form>
+                            <div class="no-account">
+                                <a asp-controller="account" asp-action="login">Already have an account? Go to Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.js"></script>
+}

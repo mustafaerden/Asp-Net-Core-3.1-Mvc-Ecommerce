@@ -1,0 +1,242 @@
+﻿@model ProductListViewModel
+@{
+    ViewData["Title"] = "Nexspend | Home Page";
+}
+
+<!--Slider and Categories Area Start-->
+<div class="slider-area transparent-bg slider-style-4">
+    <div class="container">
+        <div class="row mt-30">
+            <div class="col-md-12 col-lg-3">
+                <!--Category Menu Start-->
+                @await Component.InvokeAsync("CategoryList")
+                <!--Category Menu End-->
+            </div>
+            <div class="col-md-12 col-lg-9">
+                <div class="hero-slider hero-slider-4 owl-carousel">
+                    <!--Single Slider Start-->
+                    <div class="single-slider" style="background-image: url(home/img/slider/home4-slider-1.jpg)">
+                        <div class="hero-slider-content">
+                            <h3 class="slow-animation1">Apple Iphone</h3>
+                            <h3 class="slow-animation2">& Ipad Mini</h3>
+                            <p class="small-text1">Save <span>$50-$100</span>  on the latest</p>
+                            <p class="small-text2">models. Plus free shipping.</p>
+                            <div class="slider-btn white-btn2 mt-50">
+                                <a href="#">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Single Slider End-->
+                    <!--Single Slider Start-->
+                    <div class="single-slider" style="        background-image: url(home/img/slider/home4-slider-2.jpg)">
+                        <div class="hero-slider-content dark-color">
+                            <h3 class="slow-animation1">Samsung</h3>
+                            <h3 class="slow-animation2">galaxy Note 9</h3>
+                            <p class="small-text1">Come with FREE AKG</p>
+                            <p class="small-text2">Headphone worth $248</p>
+                            <div class="slider-btn white-btn2 mt-50">
+                                <a href="#">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Single Slider End-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Slider and Categories Area End-->
+
+<div class="home-sidebar-layout">
+    <div class="container">
+        <div class="row">
+            <!--Home Left Sidebar Start-->
+            <!--Home Left Sidebar End-->
+            <!--Home Right Sidebar Start-->
+            <div class="col-md-12 order-lg-2 col-lg-12 order-1">
+                <div class="home-right-sidebar">
+                    @if (Model.LastFiveProducts.Count > 0)
+                    {
+                        <!--NEw Arrivals Product Start-->
+                        <div class="deal-of-day-product mb-80">
+                            <div class="row">
+                                <div class="col-12">
+                                    <!--Section Title Start-->
+                                    <div class="section-title">
+                                        <h2>New Arrivals</h2>
+                                    </div>
+                                    <!--Section Title End-->
+                                </div>
+                            </div>
+                            <div class="deal-product-block-content">
+                                <div class="row">
+                                    <div class="deal-product-active owl-carousel">
+                                        @foreach (var newProduct in Model.LastFiveProducts)
+                                        {
+                                            <div class="col-md-12">
+                                                <!--Single Product Start-->
+                                                <div class="single-product style-3">
+                                                    <div class="product-img">
+
+                                                        @if (newProduct.ProductImages.Any() & newProduct.FeaturedImageId != null)
+                                                        {
+                                                            foreach (var item in newProduct.ProductImages)
+                                                            {
+                                                                if (newProduct.FeaturedImageId == item.Id)
+                                                                {
+                                                                    <a asp-controller="shop" asp-action="productdetail" asp-route-id="@newProduct.Id" asp-route-slug="@newProduct.Slug">
+                                                                        <img class="first-img" src="~/uploads/products/@item.Url" alt="@newProduct.Name" />
+                                                                    </a>
+                                                                }
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <a asp-controller="shop" asp-action="productdetail" asp-route-id="@newProduct.Id" asp-route-slug="@newProduct.Slug">
+                                                                <img class="first-img" src="~/uploads/products/no-image.png" />
+                                                            </a>
+                                                        }
+
+                                                        <span class="sticker">New</span>
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <h4>
+                                                            <a asp-controller="shop" asp-action="productdetail" asp-route-id="@newProduct.Id" asp-route-slug="@newProduct.Slug">@newProduct.Name</a>
+                                                        </h4>
+                                                        <div class="product-price">
+                                                            <span class="regular-price">₱@(newProduct.Price*5/4)</span>
+                                                            <span class="price">₱@newProduct.Price</span>
+                                                        </div>
+                                                        <form asp-controller="cart" asp-action="addtocart" method="post">
+                                                            <input type="hidden" name="productId" value="@newProduct.Id">
+                                                            <input type="hidden" name="quantity" value="1">
+                                                            <button type="submit" class="btn btn-danger mt-2">Add To Cart</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!--Single Product End-->
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--New Arrivals Product End-->
+                    }
+
+                    <!--Banner Area Start-->
+                    <div class="banner-area mb-75">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="banner-inner">
+                                    <a href="#">
+                                        <img src="/home/img/banner/offer-banner2.jpg" alt="Alternate Text" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Banner Area End-->
+                    <!--Featured Products Area Start-->
+                    <div class="best-seller-area mb-50">
+                        <div class="row">
+                            <div class="col-12">
+                                <!--Section Title Start-->
+                                <div class="section-title">
+                                    <h2>featured products</h2>
+                                </div>
+                                <!--Section Title End-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="bestproduct-block-content">
+                                    <div class="row">
+                                        <div class="bestsellerSlide pdr-0 home-3-product owl-carousel">
+                                            @if (Model.FeaturedProducts.Any())
+                                            {
+                                                foreach (var featuredProduct in Model.FeaturedProducts)
+                                                {
+                                                    <div class="col-md-12">
+                                                        <!--Single Product Start-->
+                                                        <div class="single-product style-3">
+                                                            <div class="product-img">
+                                                                @if (featuredProduct.ProductImages.Any() & featuredProduct.FeaturedImageId != null)
+                                                                {
+                                                                    foreach (var item in featuredProduct.ProductImages)
+                                                                    {
+                                                                        if (featuredProduct.FeaturedImageId == item.Id)
+                                                                        {
+                                                                            <a asp-controller="shop" asp-action="productdetail" asp-route-id="@featuredProduct.Id" asp-route-slug="@featuredProduct.Slug">
+                                                                                <img class="first-img"
+                                                                                     src="~/uploads/products/@item.Url"
+                                                                                     alt="@featuredProduct.Name" />
+                                                                            </a>
+                                                                        }
+                                                                    }
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a asp-controller="shop" asp-action="productdetail" asp-route-id="@featuredProduct.Id" asp-route-slug="@featuredProduct.Slug">
+                                                                        <img class="first-img" src="~/uploads/products/no-image.png" />
+                                                                    </a>
+                                                                }
+                                                                <span class="sticker">Featured</span>
+                                                            </div>
+                                                            <div class="product-content">
+                                                                <h4>
+                                                                    <a asp-controller="shop" asp-action="productdetail" asp-route-id="@featuredProduct.Id" asp-route-slug="@featuredProduct.Slug">@featuredProduct.Name</a>
+                                                                </h4>
+                                                                <div class="product-price">
+                                                                    <span class="price">₱@featuredProduct.Price</span>
+                                                                </div>
+                                                                <div class="product-reviews">
+                                                                    <i class="ion-android-star"></i>
+                                                                    <i class="ion-android-star"></i>
+                                                                    <i class="ion-android-star"></i>
+                                                                    <i class="ion-android-star"></i>
+                                                                    <i class="ion-android-star"></i>
+                                                                </div>
+                                                                <button class="btn btn-danger mt-2">Add To Cart</button>
+                                                            </div>
+                                                        </div>
+                                                        <!--Single Product End-->
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Featured Products End-->
+                    <!--Banner Area Start-->
+                    <div class="banner-area mb-50">
+                        <div class="row clearfix">
+                            <div class="col-md-7 coustom-col-1">
+                                <div class="banner-inner mb-30">
+                                    <a href="#">
+                                        <img src="~/home/img/banner/product-banner10.jpg" alt="" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-5 coustom-col-2">
+                                <div class="banner-inner mb-30">
+                                    <a href="#">
+                                        <img src="~/home/img/banner/product-banner11.jpg" alt="" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Banner Area End-->
+                </div>
+            </div>
+            <!--Home Right Sidebar End-->
+        </div>
+    </div>
+</div>
+
+
